@@ -12,7 +12,7 @@
 
 小程序自身 UI 的 Dark Mode，可使用 CSS 变量来控制，其它需要变化的色值，均源自 CSS 变量即可。
 
-> 完整代码 → https://github.com/nanxiaobei/taro-ux-kits/dark-mode
+> 完整代码 → https://github.com/nanxiaobei/taro-ux-kits/tree/main/dark-mode
 
 <details>
 <summary>▶ 点击查看代码</summary>
@@ -64,7 +64,7 @@ FUTAKE 实现了类似手机原生弹窗的效果 —— 按住弹窗体后，�
 
 实现方式即监听 touch 相关事件，动态设置 CSS 偏移，为进一步提升性能，使用原生小程序 `wxs` 来写。
 
-> 完整代码 → https://github.com/nanxiaobei/taro-ux-kits/draggable-modal
+> 完整代码 → https://github.com/nanxiaobei/taro-ux-kits/tree/main/draggable-modal
 
 <details>
 <summary>▶ 点击查看代码</summary>
@@ -144,7 +144,7 @@ module.exports = {
 
 使用 CSS 的 `backdrop-filter` 来实现。
 
-> 完整代码 → https://github.com/nanxiaobei/taro-ux-kits/custom-tab-bar
+> 完整代码 → https://github.com/nanxiaobei/taro-ux-kits/tree/main/custom-tab-bar
 
 <details>
 <summary>▶ 点击查看代码</summary>
@@ -209,7 +209,7 @@ module.exports = {
 
 这里的重点是需要计算滑动的角度，例如 `→` 这样的可以返回，但 `↘` 和 `↓` 这样的，应该忽略掉。
 
-> 完整代码 → https://github.com/nanxiaobei/taro-ux-kits/touch-move-back
+> 完整代码 → https://github.com/nanxiaobei/taro-ux-kits/tree/main/touch-move-back
 
 <details>
 <summary>▶ 点击查看代码</summary>
@@ -280,7 +280,7 @@ const useMoveX = ({ toLeft, toRight, disable }) => {
 
 在 React 中使用时，要注意将 loading 元素隔离开来，因为 loading 元素是不断 re-render 的。
 
-> 完整代码 → https://github.com/nanxiaobei/taro-ux-kits/blur-loading
+> 完整代码 → https://github.com/nanxiaobei/taro-ux-kits/tree/main/blur-loading
 
 <details>
 <summary>▶ 点击查看代码</summary>
@@ -402,7 +402,7 @@ FUTAKE 使用 Swiper 组件，实现了类似抖音的上下滑动浏览。
 
 展示正在浏览的条目以及前后预载入条目，其它条目展示空元素占位即可。
 
-> 完整代码 → https://github.com/nanxiaobei/taro-ux-kits/use-dynamic-list
+> 完整代码 → https://github.com/nanxiaobei/taro-ux-kits/tree/main/use-dynamic-list
 
 <details>
 <summary>▶ 点击查看代码</summary>
@@ -439,7 +439,7 @@ FUTAKE 实现了类似 Instagram 的对图片双击即可点赞的效果。
 
 同时增加了「喜欢」展示红色 ❤️，「取消喜欢」展示白色 🤍 的逻辑。
 
-> 完整代码 → https://github.com/nanxiaobei/taro-ux-kits/double-click-like
+> 完整代码 → https://github.com/nanxiaobei/taro-ux-kits/tree/main/double-click-like
 
 <details>
 <summary>▶ 点击查看代码</summary>
