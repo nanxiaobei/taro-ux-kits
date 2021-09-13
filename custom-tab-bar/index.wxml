@@ -1,0 +1,14 @@
+<view class="tab-bar {{ path }}">
+  <block wx:for="{{ list }}" wx:key="path">
+    <view
+      class="tab {{ item.path === path ? 'active' : '' }}"
+      hover-class="hover"
+      hover-start-time="{{ 0 }}"
+      hover-stay-time="{{ 50 }}"
+      data-path="{{ item.path }}"
+      bind:tap="onTabClick"
+    >
+      <image class="icon" src="{{ item.icon }}" />
+    </view>
+  </block>
+</view>

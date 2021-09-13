@@ -1,0 +1,41 @@
+.like-icon {
+  image {
+    width: 144px;
+    height: 144px;
+  }
+
+  @shine: shine both 0.5s;
+  @drop-shadow: drop-shadow(0 8px 16px rgba(#000, 0.15));
+
+  &.is-red image {
+    filter: @drop-shadow;
+    animation: @shine;
+  }
+
+  &.is-white image {
+    filter: brightness(0) invert(1) opacity(0.7) @drop-shadow;
+    animation: @shine reverse;
+  }
+
+  @keyframes shine {
+    0% {
+      opacity: 0;
+      transform: scale(0.3);
+    }
+
+    30% {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    98% {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    100% {
+      opacity: 0;
+      transform: scale(1);
+    }
+  }
+}

@@ -1,0 +1,36 @@
+// 以下 CSS 变量请自行设置
+// --top-bar-height          顶部状态栏高度 + 标题栏高度
+// --safe-bottom-height      全面屏底部安全区域高度
+// --safe-bottom-bar-height  全面屏底部安全区域高度 + tabBar 高度
+
+.blur-loading {
+  position: fixed;
+  top: var(--top-bar-height);
+  backdrop-filter: var(--blur);
+  pointer-events: none;
+
+  &.has-tab-bar {
+    bottom: var(--safe-bottom-bar-height);
+  }
+
+  &.hide-dots > .dot {
+    opacity: 0;
+  }
+}
+
+.refresh-box {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  min-height: 100vh;
+  padding-top: var(--top-bar-height);
+
+  &.is-tab-page {
+    padding-bottom: var(--safe-bottom-bar-height);
+  }
+
+  &.is-sub-page {
+    padding-bottom: var(--safe-bottom-height);
+  }
+}

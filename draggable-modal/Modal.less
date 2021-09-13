@@ -1,0 +1,70 @@
+@time: 200ms;
+
+.modal {
+  position: relative;
+  z-index: 10000;
+
+  .mask {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(#000, 0.5);
+  }
+
+  .container {
+    position: fixed;
+    right: 0;
+    left: 0;
+
+    .controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .bar-icon {
+        width: 56px;
+        height: 8px;
+        background: rgba(#000, 0.2);
+        border-radius: 10px;
+      }
+
+      .close-icon {
+        position: absolute;
+        top: 0;
+        width: 80px;
+        height: 80px;
+        padding: 20px;
+      }
+    }
+  }
+
+  &.show {
+    .mask {
+      height: 100%;
+      opacity: 1;
+      transition: @time ease-out, height 0s 0s;
+    }
+
+    .container {
+      bottom: 0;
+      opacity: 1;
+      transition: @time ease-out, opacity 0s 0s;
+    }
+  }
+
+  &.hide {
+    .mask {
+      height: 0;
+      opacity: 0;
+      transition: @time ease-out, height 0s @time;
+    }
+
+    .container {
+      bottom: -100%;
+      opacity: 0;
+      transition: @time ease-out, opacity 0s @time;
+    }
+  }
+}

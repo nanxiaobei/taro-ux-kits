@@ -1,0 +1,41 @@
+#theme() {
+  --dark: #000;
+  --darken: 0, 0, 0;
+  --light: #fff;
+  --lighten: 255, 255, 255;
+
+  // 颜色变量：https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/color/
+  --yellow: #ff9500;
+  --green: #34c759;
+  --blue: #007aff;
+  --indigo: #048;
+  --red: #ff3b30;
+}
+
+#dark-theme() {
+  --dark: #fff;
+  --darken: 255, 255, 255;
+  --light: #000;
+  --lighten: 0, 0, 0;
+
+  --yellow: #ff9500;
+  --green: #30d158;
+  --blue: #0a84ff;
+  --indigo: #bce;
+  --red: #ff453a;
+
+  // 对添加 className="icon" 的图标，暗色模式时进行颜色反转（由黑色变为白色）
+  .icon {
+    filter: invert(1);
+  }
+}
+
+page {
+  #theme();
+}
+
+@media (prefers-color-scheme: dark) {
+  page {
+    #dark-theme();
+  }
+}

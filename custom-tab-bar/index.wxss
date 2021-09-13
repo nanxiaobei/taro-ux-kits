@@ -1,0 +1,45 @@
+.tab-bar {
+  --lighten: 255, 255, 255;
+
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  backdrop-filter: blur(24px);
+}
+
+.tab {
+  position: relative;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: calc(96px + constant(safe-area-inset-bottom));
+  height: calc(96px + env(safe-area-inset-bottom));
+  padding-bottom: constant(safe-area-inset-bottom);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.icon {
+  width: 44px;
+  height: 44px;
+  opacity: 0.2;
+}
+
+.tab.active .icon,
+.tab.hover .icon {
+  opacity: 1;
+}
+
+@media (prefers-color-scheme: dark) {
+  .tab-bar {
+    --lighten: 0, 0, 0;
+  }
+
+  .icon {
+    filter: invert(1);
+  }
+}

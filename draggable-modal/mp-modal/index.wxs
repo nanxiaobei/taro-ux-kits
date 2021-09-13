@@ -1,0 +1,98 @@
+function getSetTimeout(raf) {
+  return function setTimeout(cb, delay) {
+    var start = Date.now();
+    var end;
+    var loop = function () {
+      end = Date.now();
+      if (end - start >= delay) return cb();
+      raf(loop);
+    };
+    raf(loop);
+  };
+}
+
+function getAngle(x, y) {
+  return (Math.atan2(y, x) * 180) / Math.PI;
+}
+
+function getOffset(event, obj, touchMove) {
+  var pos = event.changedTouches[0];
+  var offset = pos.pageY - obj.startY;
+
+  if (offset <= 0) {
+    if (touchMove && obj.prevOffset) obj.reset = true;
+    return null;
+  }
+
+  var diffX = pos.pageX - obj.startX;
+  var angle = getAngle(diffX, offset);
+  if (angle < 45 || angle > 135) {
+    if (touchMove && obj.prevOffset) obj.reset = true;
+    return null;
+  }
+
+  if (touchMove) obj.prevOffset = offset;
+  return offset;
+}
+
+module.exports = {
+  onTouchStart: function (event, ownerInstance) {
+    if (event.instance.getDataset().stop) return;
+
+    var obj = ownerInstance.getState();
+
+    if (!obj.setOffset) {
+      var moveWrapper = ownerInstance.selectComponent('#move-wrapper');
+      var setWrapperStyle = moveWrapper.setStyle;
+      obj.raf = moveWrapper.requestAnimationFrame;
+      obj.setTimeout = getSetTimeout(obj.raf);
+
+      obj.setOffset = function (offset) {
+        setWrapperStyle(offset === 0 ? {} : { 'margin-bottom': '-' + Math.ceil(offset) + 'px' });
+      };
+    }
+
+    var pos = event.changedTouches[0];
+    obj.startX = pos.pageX;
+    obj.startY = pos.pageY;
+    obj.startTime = Date.now();
+
+    obj.prevOffset = null;
+    obj.reset = false;
+  },
+
+  onTouchMove: function (event, ownerInstance) {
+    if (event.instance.getDataset().stop) return;
+
+    var obj = ownerInstance.getState();
+    var offset = getOffset(event, obj, 'touchMove');
+    if (!offset) return;
+
+    obj.raf(function () {
+      obj.setOffset(offset);
+    });
+  },
+
+  onTouchEnd: function (event, ownerInstance) {
+    if (event.instance.getDataset().stop) return;
+
+    var obj = ownerInstance.getState();
+    var offset = getOffset(event, obj);
+    if (!offset) {
+      if (obj.reset) obj.setOffset(0);
+      return;
+    }
+
+    obj.raf(function () {
+      if (offset > 150 || (offset > 10 && Date.now() - obj.startTime < 200)) {
+        ownerInstance.callMethod('onClose');
+        obj.setTimeout(function () {
+          obj.setOffset(0);
+        }, 200);
+        return;
+      }
+
+      obj.setOffset(0);
+    });
+  }
+};
