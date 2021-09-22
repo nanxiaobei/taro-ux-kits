@@ -64,7 +64,7 @@ page {
 
 FUTAKE 实现了类似手机原生弹窗的效果 —— 按住弹窗体后，可上下拖动弹窗。
 
-实现方式即监听 touch 相关事件，动态设置 CSS 偏移，为进一步提升性能，使用原生小程序 `wxs` 来写。
+实现方式即监听 touch 相关事件，动态设置 CSS 偏移。
 
 > 完整代码 → [github.com/nanxiaobei/taro-ux-kits/tree/main/draggable-modal](https://github.com/nanxiaobei/taro-ux-kits/tree/main/draggable-modal)
 
@@ -72,68 +72,50 @@ FUTAKE 实现了类似手机原生弹窗的效果 —— 按住弹窗体后，�
 <summary>▶ 点击查看代码</summary>
 
 ```js
-// wxs 核心代码（省略了工具函数）
-module.exports = {
-  onTouchStart: function (event, ownerInstance) {
-    var obj = ownerInstance.getState();
+// 核心代码（省略了工具函数）
+const onTouchStart = useCallback(
+  (event) => {
+    if (stopClose) return;
 
-    if (!obj.setOffset) {
-      var moveWrapper = ownerInstance.selectComponent("#move-wrapper");
-      var setWrapperStyle = moveWrapper.setStyle;
-      obj.raf = moveWrapper.requestAnimationFrame;
-      obj.setTimeout = getSetTimeout(obj.raf);
-
-      obj.setOffset = function (offset) {
-        setWrapperStyle(
-          offset === 0
-            ? {}
-            : { "margin-bottom": "-" + Math.ceil(offset) + "px" }
-        );
-      };
-    }
-
-    var pos = event.changedTouches[0];
-    obj.startX = pos.pageX;
-    obj.startY = pos.pageY;
-    obj.startTime = Date.now();
-
-    obj.prevOffset = null;
-    obj.reset = false;
+    const { pageX, pageY } = event.changedTouches[0];
+    startX.current = pageX;
+    startY.current = pageY;
+    startTime.current = Date.now();
   },
+  [stopClose]
+);
 
-  onTouchMove: function (event, ownerInstance) {
-    var obj = ownerInstance.getState();
+const onTouchMove = useCallback(
+  (event) => {
+    if (stopClose) return;
 
-    var offset = getOffset(event, obj, "touchMove");
-    if (!offset) return;
-
-    obj.raf(function () {
-      obj.setOffset(offset);
-    });
+    const diffY = getDiffY(event.changedTouches[0]);
+    if (!diffY) return;
+    setBottomRef.current(diffY);
   },
+  [stopClose]
+);
 
-  onTouchEnd: function (event, ownerInstance) {
-    var obj = ownerInstance.getState();
+const onTouchEnd = useCallback(
+  (event) => {
+    if (stopClose) return;
 
-    var offset = getOffset(event, obj);
-    if (!offset) {
-      if (obj.reset) obj.setOffset(0);
+    const diffY = getDiffY(event.changedTouches[0]);
+    if (!diffY) {
+      setBottomRef.current(0);
       return;
     }
 
-    obj.raf(function () {
-      if (offset > 150 || (offset > 10 && Date.now() - obj.startTime < 200)) {
-        ownerInstance.callMethod("onClose");
-        obj.setTimeout(function () {
-          obj.setOffset(0);
-        }, 200);
-        return;
-      }
+    if (diffY > 200 || (diffY > 10 && Date.now() - startTime.current < 200)) {
+      onClose();
+      setTimeout(() => setBottomRef.current(0), 200);
+      return;
+    }
 
-      obj.setOffset(0);
-    });
+    setBottomRef.current(0);
   },
-};
+  [onClose, stopClose]
+);
 ```
 
 </details>

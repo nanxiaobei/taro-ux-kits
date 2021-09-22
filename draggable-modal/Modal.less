@@ -1,44 +1,16 @@
+// 下方出现的 CSS 变量，需自行设置具体信息
+//
+// --status-bar-height: 状态栏高度
+// --title-bar-height: 标题栏高度
+// --safe-bottom-height: 全面屏底部安全区域高度
+
 @time: 200ms;
+
+@body-height: calc(100vh - var(--status-bar-height) - var(--title-bar-height));
 
 .modal {
   position: relative;
   z-index: 10000;
-
-  .mask {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background: rgba(#000, 0.5);
-  }
-
-  .container {
-    position: fixed;
-    right: 0;
-    left: 0;
-
-    .controls {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      .bar-icon {
-        width: 56px;
-        height: 8px;
-        background: rgba(#000, 0.2);
-        border-radius: 10px;
-      }
-
-      .close-icon {
-        position: absolute;
-        top: 0;
-        width: 80px;
-        height: 80px;
-        padding: 20px;
-      }
-    }
-  }
 
   &.show {
     .mask {
@@ -47,24 +19,122 @@
       transition: @time ease-out, height 0s 0s;
     }
 
-    .container {
-      bottom: 0;
+    .wrapper {
+      --bottom: 0pxpx; // keep `0pxpx`, or less will convert `0px` to `0`
+
       opacity: 1;
       transition: @time ease-out, opacity 0s 0s;
     }
+
+    &.dark .mask,
+    &.light .mask {
+      backdrop-filter: blur(64px);
+      transition: 0s;
+    }
   }
 
-  &.hide {
-    .mask {
-      height: 0;
-      opacity: 0;
-      transition: @time ease-out, height 0s @time;
+  .mask {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 0;
+    background: rgba(#000, 0.5);
+    opacity: 0;
+    transition: @time ease-out, height 0s @time;
+  }
+
+  .wrapper {
+    --bottom: -100vh;
+
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: #fff;
+    border-radius: 16px 16px 0 0;
+    //opacity: 0;
+    transition: @time ease-out, opacity 0s @time;
+
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: var(--title-bar-height);
+      font-weight: 500;
+
+      &.left-close .close-icon {
+        left: 0;
+      }
+
+      .close-icon {
+        width: 100px;
+        height: var(--title-bar-height);
+        padding: calc((var(--title-bar-height) - 20px) / 2) 40px;
+        position: absolute;
+        top: 0;
+        right: 0;
+      }
+
+      button {
+        position: absolute;
+        top: 0;
+        right: 0;
+        display: flex;
+        align-items: center;
+        height: inherit;
+        padding-right: 32px;
+        padding-left: 32px;
+        color: #09c;
+      }
     }
 
-    .container {
-      bottom: -100%;
-      opacity: 0;
-      transition: @time ease-out, opacity 0s @time;
+    .content {
+      max-height: calc(@body-height - var(--title-bar-height));
+      padding-bottom: var(--safe-bottom-height);
     }
+  }
+
+  &.dark .mask {
+    background: rgba(#000, 0.6);
+    transition: 0s;
+  }
+
+  &.light .mask {
+    background: rgba(#fffen, 0.6);
+    transition: 0s;
+  }
+
+  &.dark .wrapper,
+  &.light .wrapper,
+  &.list .wrapper {
+    background: transparent;
+    border-radius: 0;
+  }
+
+  &.list .wrapper {
+    right: 32px;
+    left: 32px;
+  }
+
+  &.full .wrapper {
+    height: 100vh;
+    padding-top: var(--status-bar-height);
+
+    .header {
+      .close-icon {
+        top: var(--status-bar-height);
+        opacity: 0.3;
+      }
+    }
+
+    .content {
+      max-height: @body-height;
+    }
+  }
+
+  &.large .wrapper {
+    height: @body-height;
   }
 }
