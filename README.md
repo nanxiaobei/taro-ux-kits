@@ -1,8 +1,8 @@
 # taro-ux-kits
 
-使用 Taro 开发 [**FUTAKE**](https://sotake.com/f) 小程序时，7 个与用户体验有关的优化。
+使用 Taro 开发 [**FUTAKE**](https://sotake.com/futake) 小程序时，7 个与用户体验有关的优化。
 
-[**👉 点击体验 FUTAKE 🌁**](https://sotake.com/f)
+[**👉 点击体验 FUTAKE 🌁**](https://sotake.com/futake)
 
 <img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1ba74498efbd4876986d0f7da1baaf3a~tplv-k3u1fbpfcp-watermark.image" alt="" />
 
