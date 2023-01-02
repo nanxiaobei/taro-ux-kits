@@ -467,8 +467,7 @@ const LikeWrapper = ({ isLiked, likeRequest }) => {
 
 ---
 
-[**👉 欢迎体验 FUTAKE 🗺**](https://sotake.com/f)
+[**👉 欢迎体验 FUTAKE 🗺**](https://sotake.com/futake)
 
-<img src="https://s3.jpg.cm/2021/09/21/IFG3wi.png" alt="" />
+<img src="https://s3.bmp.ovh/imgs/2022/07/21/452dd47aeb790abd.png" alt="" />
 
-[**👉 访问 FUTAKE 官网 🗺**](https://sotake.com/f)
