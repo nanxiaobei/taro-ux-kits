@@ -1,3 +1,12 @@
+<div align="center">
+<p><a href="https://kee.so/" target="_blank"><img src="https://i.imgur.com/x5SRUoo.png" alt="kee.so" /></a></p>
+
+Create now ➫ [🔗 kee.so](https://kee.so/)
+
+</div>
+
+---
+
 # taro-ux-kits
 
 使用 Taro 开发 [**FUTAKE**](https://sotake.com/futake) 小程序时，7 个与用户体验有关的优化。
@@ -82,7 +91,7 @@ const onTouchStart = useCallback(
     startY.current = pageY;
     startTime.current = Date.now();
   },
-  [stopClose]
+  [stopClose],
 );
 
 const onTouchMove = useCallback(
@@ -93,7 +102,7 @@ const onTouchMove = useCallback(
     if (!diffY) return;
     setBottomRef.current(diffY);
   },
-  [stopClose]
+  [stopClose],
 );
 
 const onTouchEnd = useCallback(
@@ -114,7 +123,7 @@ const onTouchEnd = useCallback(
 
     setBottomRef.current(0);
   },
-  [onClose, stopClose]
+  [onClose, stopClose],
 );
 ```
 
@@ -214,7 +223,7 @@ const useMoveX = ({ toLeft, toRight, disable }) => {
       startY.current = pageY;
       startTime.current = Date.now();
     },
-    [disable]
+    [disable],
   );
 
   const getAbsAngle = useCallback((diffX, pageY) => {
@@ -243,7 +252,7 @@ const useMoveX = ({ toLeft, toRight, disable }) => {
           toLeft();
       }
     },
-    [disable, getAbsAngle, toLeft, toRight]
+    [disable, getAbsAngle, toLeft, toRight],
   );
 
   return { onTouchStart, onTouchEnd };
@@ -280,7 +289,7 @@ const useBlurLoading = ({ hasTabBar }) => {
 
   const blurStyle = useMemo(() => {
     if (blur < START) return undefined;
-    return { "--blur": `blur(${Math.floor((blur - START) / 3)}px)` };
+    return { '--blur': `blur(${Math.floor((blur - START) / 3)}px)` };
   }, [blur]);
 
   const startLoading = useCallback((reqFn) => {
@@ -452,7 +461,7 @@ const LikeWrapper = ({ isLiked, likeRequest }) => {
       }
       prevTime.current = startTime;
     },
-    [iconVisible, isLiked, likeRequest]
+    [iconVisible, isLiked, likeRequest],
   );
 
   return (
@@ -470,4 +479,3 @@ const LikeWrapper = ({ isLiked, likeRequest }) => {
 [**👉 欢迎体验 FUTAKE 🗺**](https://sotake.com/futake)
 
 <img src="https://s3.bmp.ovh/imgs/2022/07/21/452dd47aeb790abd.png" alt="" />
-
