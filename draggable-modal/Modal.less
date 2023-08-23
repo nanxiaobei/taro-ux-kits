@@ -16,14 +16,18 @@
     .mask {
       height: 100%;
       opacity: 1;
-      transition: @time ease-out, height 0s 0s;
+      transition:
+        @time ease-out,
+        height 0s 0s;
     }
 
     .wrapper {
       --bottom: 0pxpx; // keep `0pxpx`, or less will convert `0px` to `0`
 
       opacity: 1;
-      transition: @time ease-out, opacity 0s 0s;
+      transition:
+        @time ease-out,
+        opacity 0s 0s;
     }
 
     &.dark .mask,
@@ -42,7 +46,9 @@
     height: 0;
     background: rgba(#000, 0.5);
     opacity: 0;
-    transition: @time ease-out, height 0s @time;
+    transition:
+      @time ease-out,
+      height 0s @time;
   }
 
   .wrapper {
@@ -55,7 +61,9 @@
     background: #fff;
     border-radius: 16px 16px 0 0;
     //opacity: 0;
-    transition: @time ease-out, opacity 0s @time;
+    transition:
+      @time ease-out,
+      opacity 0s @time;
 
     .header {
       display: flex;

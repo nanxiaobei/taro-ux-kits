@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo } from 'react';
 
 // 获取动态列表
 const splitCount = (count) => {

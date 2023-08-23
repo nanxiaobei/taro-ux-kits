@@ -1,4 +1,4 @@
-import { useCallback, useRef } from "react";
+import { useCallback, useRef } from 'react';
 
 const getAngle = (x, y) => Math.atan2(y, x) * (180 / Math.PI);
 
@@ -22,7 +22,7 @@ const useMoveX = ({ toLeft, toRight, disable }) => {
       startY.current = pageY;
       startTime.current = Date.now();
     },
-    [disable]
+    [disable],
   );
 
   const getAbsAngle = useCallback((diffX, pageY) => {
@@ -51,7 +51,7 @@ const useMoveX = ({ toLeft, toRight, disable }) => {
           toLeft();
       }
     },
-    [disable, getAbsAngle, toLeft, toRight]
+    [disable, getAbsAngle, toLeft, toRight],
   );
 
   return { onTouchStart, onTouchEnd };

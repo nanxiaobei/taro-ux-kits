@@ -1,7 +1,7 @@
-import { useState, useEffect, useCallback, useRef, memo } from "react";
-import { View, Image } from "@tarojs/components";
-import closeIcon from "./close.svg";
-import "./Modal.less";
+import { useState, useEffect, useCallback, useRef, memo } from 'react';
+import { View, Image } from '@tarojs/components';
+import closeIcon from './close.svg';
+import './Modal.less';
 
 const getAngle = (x, y) => Math.atan2(y, x) * (180 / Math.PI);
 
@@ -21,21 +21,21 @@ const Wrapper = memo(
         onTouchEnd={onTouchEnd}
         style={{
           marginBottom: `calc(var(--bottom)${
-            bottom > 0 ? ` - ${bottom}px` : ""
+            bottom > 0 ? ` - ${bottom}px` : ''
           })`,
         }}
       >
         {children}
       </View>
     );
-  }
+  },
 );
 
 const Modal = (props) => {
   const {
-    className = "",
-    type = "auto", // auto, large, full, list
-    blur = "none", // none, light, dark
+    className = '',
+    type = 'auto', // auto, large, full, list
+    blur = 'none', // none, light, dark
     visible,
     stopClose,
     onClose,
@@ -70,7 +70,7 @@ const Modal = (props) => {
       startY.current = pageY;
       startTime.current = Date.now();
     },
-    [stopClose]
+    [stopClose],
   );
 
   const onTouchMove = useCallback(
@@ -81,7 +81,7 @@ const Modal = (props) => {
       if (!diffY) return;
       setBottomRef.current(diffY);
     },
-    [stopClose]
+    [stopClose],
   );
 
   const onTouchEnd = useCallback(
@@ -102,12 +102,12 @@ const Modal = (props) => {
 
       setBottomRef.current(0);
     },
-    [onClose, stopClose]
+    [onClose, stopClose],
   );
 
   return (
     <View
-      className={`modal ${type} ${blur} ${visible ? "show" : "hide"}`}
+      className={`modal ${type} ${blur} ${visible ? 'show' : 'hide'}`}
       catchMove
     >
       <View className="mask" onTouchStart={onClose} />
@@ -118,9 +118,9 @@ const Modal = (props) => {
         onTouchMove={onTouchMove}
         onTouchEnd={onTouchEnd}
       >
-        {type !== "list" && (
+        {type !== 'list' && (
           <View
-            className={`header ${type === "full" || btnOk ? "left-close" : ""}`}
+            className={`header ${type === 'full' || btnOk ? 'left-close' : ''}`}
           >
             <Image
               className="icon close-icon"

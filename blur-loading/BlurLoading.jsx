@@ -1,15 +1,15 @@
-import { useState, useCallback, useMemo, useRef, memo } from "react";
-import { usePageScroll, vibrateShort } from "@tarojs/taro";
-import { View } from "@tarojs/components";
-import Loading from "./Loading";
-import "./BlurLoading.less";
+import { useState, useCallback, useMemo, useRef, memo } from 'react';
+import { usePageScroll, vibrateShort } from '@tarojs/taro';
+import { View } from '@tarojs/components';
+import Loading from './Loading';
+import './BlurLoading.less';
 
 const initObj = {};
-const shakePhone = () => vibrateShort({ type: "medium" });
+const shakePhone = () => vibrateShort({ type: 'medium' });
 
 const BlurLoading = ({ dots, blurStyle, hasTabBar }) => {
-  const tabBarClass = hasTabBar ? "has-tab-bar" : "";
-  const dotsClass = dots ? "" : "hide-dots";
+  const tabBarClass = hasTabBar ? 'has-tab-bar' : '';
+  const dotsClass = dots ? '' : 'hide-dots';
 
   return (
     <Loading
@@ -28,7 +28,7 @@ const useBlurLoading = ({ hasTabBar }) => {
 
   const blurStyle = useMemo(() => {
     if (blur < START) return undefined;
-    return { "--blur": `blur(${Math.floor((blur - START) / 3)}px)` };
+    return { '--blur': `blur(${Math.floor((blur - START) / 3)}px)` };
   }, [blur]);
 
   const startLoading = useCallback((reqFn) => {
@@ -139,7 +139,7 @@ export const useSwiperLoading = ({ hasTabBar } = initObj) => {
 
       onTouchMoveChange(absDiffY, onPullDown || onPullUp);
     },
-    [onTouchMoveChange]
+    [onTouchMoveChange],
   );
 
   return { loadingEl, startLoading, onSwiperTransition, onTouchEnd };
@@ -170,7 +170,7 @@ const usePullDownRefresh = ({ hasTabBar } = initObj) => {
         onTouchMoveChange(-moveY, onPullDown);
       }
     },
-    [onTouchMoveChange]
+    [onTouchMoveChange],
   );
 
   return { loadingEl, onTouchStart, onTouchChange, onTouchEnd };
@@ -189,13 +189,13 @@ const RefreshBox = memo((props) => {
 
   const onTouchMove = useCallback(
     (event) => onTouchChange(event, onPullDown),
-    [onPullDown, onTouchChange]
+    [onPullDown, onTouchChange],
   );
 
   return (
     <View
       className={`refresh-box ${
-        hasTabBar ? "is-tab-page" : "is-sub-page"
+        hasTabBar ? 'is-tab-page' : 'is-sub-page'
       } ${className}`}
       onTouchStart={onTouchStart}
       onTouchMove={onTouchMove}
@@ -210,7 +210,7 @@ const RefreshBox = memo((props) => {
  * View 容器下拉加载组件
  */
 export const PullDownRefresh = (props) => {
-  const { className = "", onPullDown, hasTabBar, children } = props;
+  const { className = '', onPullDown, hasTabBar, children } = props;
   const { loadingEl, onTouchStart, onTouchChange, onTouchEnd } =
     usePullDownRefresh({ hasTabBar });
 

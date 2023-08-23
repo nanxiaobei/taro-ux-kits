@@ -1,8 +1,8 @@
-import { memo } from "react";
-import { View } from "@tarojs/components";
-import "./Loading.less";
+import { memo } from 'react';
+import { View } from '@tarojs/components';
+import './Loading.less';
 
-const Loading = memo(({ className = "", style }) => {
+const Loading = memo(({ className = '', style }) => {
   return (
     <View className={`loading ${className}`} style={style}>
       <View className="dot" />

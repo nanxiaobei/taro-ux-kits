@@ -1,10 +1,10 @@
-import { useState, useCallback, useRef } from "react";
-import { View, Image } from "@tarojs/components";
-import likeRedIcon from "./like_red.svg";
+import { useState, useCallback, useRef } from 'react';
+import { View, Image } from '@tarojs/components';
+import likeRedIcon from './like_red.svg';
 
 const LikeIcon = ({ isRed }) => {
   return (
-    <View className={`like-icon ${isRed ? "is-red" : "is-white"}`}>
+    <View className={`like-icon ${isRed ? 'is-red' : 'is-white'}`}>
       <Image src={likeRedIcon} />
     </View>
   );
@@ -37,7 +37,7 @@ const LikeWrapper = ({ isLiked, likeRequest }) => {
       }
       prevTime.current = startTime;
     },
-    [iconVisible, isLiked, likeRequest]
+    [iconVisible, isLiked, likeRequest],
   );
 
   return (
